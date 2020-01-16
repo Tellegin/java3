@@ -1,5 +1,7 @@
 package com.tsystems.javaschool.tasks.subsequence;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Subsequence {
@@ -14,7 +16,51 @@ public class Subsequence {
      */
     @SuppressWarnings("rawtypes")
     public boolean find(List x, List y) {
-        // TODO: Implement the logic here
-        return false;
+        //Создаем итераторы для наших списков(ниже ссылка что это такое)
+        //https://metanit.com/java/tutorial/5.10.php
+        checkForNull(x);
+        checkForNull(y);
+        Iterator firstIterator = x.iterator();
+        Iterator secondIterator = y.iterator();
+        //Создаем переменные хранящие первые значения из наших итераторов
+        Object fNext = new Object();
+        if (firstIterator.hasNext()) {
+            fNext = firstIterator.next();
+        }
+        Object sNext = new Object();
+        if (secondIterator.hasNext()) {
+            sNext = secondIterator.next();
+        }
+        int counter = 0;
+        //Пока наш второй итератор имеет следующее значение продолжай цикл
+        while (secondIterator.hasNext()) {
+            if (sNext.equals(fNext)) {
+                if (firstIterator.hasNext()) {
+                    fNext = firstIterator.next();
+                } else {
+                    sNext = secondIterator.next();
+                }
+                counter++;
+                //Иначе
+            } else {
+                //Переменная sNext хранит следующее значение
+                sNext = secondIterator.next();
+            }
+
+        }
+
+        //Так как наш итератор secondIterator достиг предела придется проверить последнее сохраненное значение
+        if (sNext.equals(fNext)) {
+            //И добавить в список если условие выполняется
+            counter++;
+        }
+        //Если списки совпадают, то возвращаем true
+        return x.size() == counter;
+    }
+
+    private void checkForNull(List checkedList) {
+        if (checkedList == null) {
+            throw new IllegalArgumentException();
+        }
     }
 }
