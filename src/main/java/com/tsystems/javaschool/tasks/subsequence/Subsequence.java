@@ -16,8 +16,7 @@ public class Subsequence {
      */
     @SuppressWarnings("rawtypes")
     public boolean find(List x, List y) {
-        //Создаем итераторы для наших списков(ниже ссылка что это такое)
-        //https://metanit.com/java/tutorial/5.10.php
+        //Создаем итераторы для наших списков
         checkForNull(x);
         checkForNull(y);
         Iterator firstIterator = x.iterator();
